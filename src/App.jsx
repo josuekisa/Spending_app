@@ -1,12 +1,15 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import Navbar from "./components/Navbar";
+import HeroSection from "./components/HeroSection";
+import Functionality from "./components/Functionality";
+import Process from "./components/Process";
 
 function App() {
   return (
     <>
       <Navbar />
+      <HeroSection />
+      <Functionality />
+      <Process />
     </>
   );
 }
