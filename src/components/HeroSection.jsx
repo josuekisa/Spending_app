@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -15,9 +16,12 @@ const HeroSection = () => {
           </span>
           <span className="block text-center">intelligente et intuitive</span>
           <div className="flex justify-center space-x-4 mt-5">
-            <button className=" bg-gradient-to-r from-[#4b19d6ad] to-[#c9c4c4af] hover:bg-[#664b7096] rounded-xl p-3 ">
-              Commencer maintenant
-            </button>
+            <Link
+              to="/Dashboard"
+              className=" bg-gradient-to-r from-[#4b19d6ad] to-[#c9c4c4af] hover:bg-[#664b7096] rounded-xl p-3 "
+            >
+              🚀 Commencer maintenant
+            </Link>
             <button className=" bg-[#837e8596] rounded-xl p-3 hover:bg-[#664b7096] ">
               En savoir plus
             </button>

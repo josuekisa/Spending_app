@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Process = () => {
   return (
@@ -60,9 +61,12 @@ const Process = () => {
           <br />
           leur budget avec ExpenseTracker.
         </p>
-        <button className="p-3 mt-3  rounded-md bg-white text-[#4A2E7E] font-semibold">
+        <Link
+          to="/Dashboard"
+          className="p-3 mt-3  rounded-md bg-white text-[#4A2E7E] font-semibold"
+        >
           🚀 Commencer maintenant
-        </button>
+        </Link>
         <span className="text-gray-300 text-xs text-center mt-5">
           Aucune inscription requise • Utilisation immédiate • 100% gratuit
         </span>

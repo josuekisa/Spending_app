@@ -2,15 +2,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import Navbar from "./components/Navbar";
+import Dashboard from "./Pages/Dashboard";
+import { ExpenseProvider } from "./context/ExpenseContext";
+import Form from "./Pages/Form";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+    <ExpenseProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Form" element={<Form />} />
+        </Routes>
+      </BrowserRouter>
+    </ExpenseProvider>
   );
 }
 
