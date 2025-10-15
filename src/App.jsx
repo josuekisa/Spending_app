@@ -1,16 +1,16 @@
+// App.jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home";
 import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
-import Functionality from "./components/Functionality";
-import Process from "./components/Process";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Navbar />
-      <HeroSection />
-      <Functionality />
-      <Process />
-    </>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
