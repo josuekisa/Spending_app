@@ -5,10 +5,14 @@ import { useContext, useState } from "react";
 const ExpenseContext = createContext();
 
 export const ExpenseProvider = ({ children }) => {
-  const [expenses, setExpense] = useState([]);
+  const [expenses, setExpenses] = useState([]);
+
+  const addExpense = (expense) => {
+    setExpenses((prev) => [...prev, expense]);
+  };
 
   return (
-    <ExpenseContext.Provider value={{ expenses, setExpense }}>
+    <ExpenseContext.Provider value={{ expenses, addExpense }}>
       {children}
     </ExpenseContext.Provider>
   );

@@ -1,31 +1,43 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useExpenses } from "../context/ExpenseContext";
+import { nanoid } from "nanoid";
+import DashboardNavbar from "../components/DashboardNavbar";
 const Form = () => {
+  const { addExpense, expenses } = useExpenses();
   const [formData, setFormData] = useState({
-    amount: 0,
+    amount: "",
     description: "",
-    category: [
-      "transport",
-      "Logement",
-      "Loisir",
-      "santé",
-      "shopping",
-      "Facture",
-      "Autres",
-    ],
+    category: "",
     date: "",
   });
 
   const handleSubmit = (e) => {
-    e.preventDefault;
+    e.preventDefault();
+
+    const newExpense = {
+      id: nanoid(),
+      amount: Number(formData.amount),
+      description: formData.description,
+      category: formData.category,
+      date: formData.date || new Date().toISOString().split("T")[0],
+    };
+
+    addExpense(newExpense);
+    setFormData({
+      amount: "",
+      description: "",
+      category: "",
+      date: "",
+    });
   };
 
   return (
     <>
       <div className="flex justify-center bg-[#0E1318] w-full h-screen">
         {" "}
+        <DashboardNavbar />
         <form
           onSubmit={handleSubmit}
           className="flex-col mt-10 max-h-max space-y-6 rounded-md text-white p-10 bg-[#20252b]"
@@ -42,9 +54,12 @@ const Form = () => {
             <input
               value={formData.amount}
               className="bg-[#6f757ce0] rounded-md p-3 w-full"
+              placeholder="Montant (€)"
               type="number"
               name="amount"
-              placeholder="Donner le montant"
+              onChange={(e) =>
+                setFormData({ ...formData, amount: e.target.value })
+              }
             />
           </div>
 
@@ -64,15 +79,19 @@ const Form = () => {
             value={formData.category}
             className="w-full p-3 bg-[#6f757ce0] rounded-md"
             placeholder="Selectionner une catégorie"
+            onChange={(e) => {
+              setFormData({ ...formData, category: e.target.value });
+            }}
             name="category"
             id=""
           >
             <option value="">-- Sélectionner une catégorie --</option>
-            <option value="transport"> transport</option>
+            <option value="Transport"> Transport</option>
             <option value="Logement">Logement</option>
             <option value="Loisir">Loisir</option>
-            <option value="santé">santé</option>
-            <option value="shopping">shopping</option>
+            <option value="Santé">Santé</option>
+            <option value="Alimentation">Alimentation</option>
+            <option value="Shopping">Shopping</option>
             <option value="Facture">Facture</option>
             <option value="Autres">Autres</option>
           </select>
@@ -80,6 +99,9 @@ const Form = () => {
             <input
               value={formData.date}
               className="w-full bg-[#6f757ce0] p-3 rounded-md"
+              onChange={(e) => {
+                setFormData({ ...formData, date: e.target.value });
+              }}
               name="date"
               placeholder="Entrer la date"
               type="date"
@@ -98,7 +120,12 @@ const Form = () => {
             </Link>
           </div>
         </form>
-        <p className="text-wite"> {formData.description}</p>
+        <p className="text-wite">{console.log(formData)}</p>
+        <ul>
+          {expenses.map((ex) => (
+            <li key={ex.id}>{ex.amount}</li>
+          ))}
+        </ul>
       </div>
     </>
   );
